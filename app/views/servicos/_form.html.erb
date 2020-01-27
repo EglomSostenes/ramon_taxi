@@ -1,0 +1,46 @@
+<%= form_with(model: servico, local:true) do |form| %>
+    <% if servico.errors.any? %>
+        <div id="error_explanation">
+            <h2> <%= pluralize(servico.errors.count, "error") %> prohibited this contrato from being saved:</h2>
+
+            <ul>
+                <% servico.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+
+    <div class="text-center mt-4"><h4>Formulário de Registro de Serviço</h4></div>
+    <hr class="bg-primary">
+
+    <div class="form-group">
+        <%=form.label :nome %>
+        <%=form.text_area :nome, {class: 'form-control' }%>
+    </div>
+
+    <div class="form-group">
+        <%=form.label :email %>
+        <%=form.text_area :email, {class: 'form-control' }%>
+    </div>
+
+    <div class="form-group">
+        <%=form.label :fone %>
+        <%=form.text_area :fone, {class: 'form-control' }%>
+    </div>
+  
+    <div class="form-group">
+        <%=form.label :inicio %>
+        <%=form.datetime_field :inicio, {class:'form-control'}%>
+    </div>
+
+    <div class="form-group">
+        <%=form.label :fim %>
+        <%=form.datetime_field :fim, {class:'form-control'}%>
+    </div>
+
+    <div class="form-group pt-2 float-right">
+        <%=link_to 'voltar', servicos_path, class:'btn btn-dark'%>
+        <%=form.submit ('registrar'), class:'btn btn-success'%>
+    </div>  
+<% end %>
