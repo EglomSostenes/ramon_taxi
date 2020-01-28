@@ -1,5 +1,5 @@
 class ServicosController < ApplicationController
-  before_action :authenticate_user!, only: [:index, :show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:index, :show, :edit, :update, :destroy, :ativos]
   before_action :set_servico, only: [:show, :edit, :update, :destroy]
 
   # GET /servicos
@@ -8,6 +8,10 @@ class ServicosController < ApplicationController
     @servicos = Servico.all
   end
 
+  def ativos
+    @servicos = Servico.where(status: 'ativo')
+    render :index
+  end
   # GET /servicos/1
   # GET /servicos/1.json
   def show
@@ -21,7 +25,7 @@ class ServicosController < ApplicationController
   # GET /servicos/1/edit
   def edit
   end
-
+    
   # POST /servicos
   # POST /servicos.json
   def create
@@ -29,6 +33,7 @@ class ServicosController < ApplicationController
 
     respond_to do |format|
       if @servico.save
+        @servico.verifica_status
         ServicoMailer.notificacao_servico(@servico).deliver_now
         format.html { redirect_to pagina_inicial_servicos_path, notice: 'Seu serviço foi adicionado.' }
       else
@@ -47,7 +52,7 @@ class ServicosController < ApplicationController
   def update
     respond_to do |format|
       if @servico.update(servico_params)
-        format.html { redirect_to @servico, notice: 'Servico alterado com sucesso!' }
+        format.html { redirect_to @servico, notice: 'Serviço alterado com sucesso!' }
         format.json { render :show, status: :ok, location: @servico }
       else
         format.html { render :edit }
@@ -74,6 +79,6 @@ class ServicosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def servico_params
-      params.require(:servico).permit(:nome, :email, :fone, :inicio, :fim)
+        params.require(:servico).permit(:nome, :email, :fone, :inicio, :fim)
     end
 end

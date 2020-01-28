@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     collection do
       get :pagina_inicial
       get :descricao
+      get :ativos
     end
   end
   	

@@ -17,9 +17,15 @@
         </li>
 
         <% if user_signed_in? and current_user.admin %>
-          <li class="nav-item active">
-            <a class="nav-link" href=<%= servicos_path %>> Serviços </a>
-          </li>
+          <li class="nav-item dropdown">
+          <a id="contratos-dropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+            Serviços
+          </a>
+          <div class="dropdown-menu bg-primary">
+            <a class="dropdown-item" href=<%= servicos_path %>> Todos os serviços </a>
+            <a class="dropdown-item" href=<%= ativos_servicos_path %>> Serviços ativos </a>
+          </div>
+        </li>
         <% end %>
 
     </ul>
