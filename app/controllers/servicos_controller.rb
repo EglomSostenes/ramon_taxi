@@ -84,7 +84,7 @@ class ServicosController < ApplicationController
     end
 
     def verifica_admin
-      if current_user.admin == false
+      if current_user.admin != true
         redirect_to pagina_inicial_servicos_path
       end
     end
