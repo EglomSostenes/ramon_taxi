@@ -1,35 +1,30 @@
-<p id="notice"><%= notice %></p>
+</br>
+<h2 class="text-center"> Serviços </h2>
 
-<h1>Serviços</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Nome</th>
-      <th>Email</th>
-      <th>Fone</th>
-      <th>Data de Inicio</th>
-      <th>Data de Fim</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @servicos.each do |servico| %>
-      <tr>
-        <td><%= servico.nome %></td>
-        <td><%= servico.email %></td>
-        <td><%= servico.fone %></td>
-        <td><%= servico.inicio %></td>
-        <td><%= servico.fim %></td>
-        <td><%= link_to 'Show', servico %></td>
-        <td><%= link_to 'Edit', edit_servico_path(servico) %></td>
-        <td><%= link_to 'Destroy', servico, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <td><strong>Nome</strong></td>
+            <td><strong>Email</strong></td>
+            <td><strong>Fone</strong></td>
+        </tr>
+    </thead>
+    <tbody>
+        <% @servicos.each do |servico| %>
+            <tr>
+                <td> <%=link_to servico.nome, servico%> </td>
+                <td> <%= servico.email %> </td>
+                <td> <%= servico.fone %> </td>
+                <td> <%= link_to '', edit_servico_path(servico), class: 'btn btn-outline-primary fas fa-edit fa-sm',
+                title: 'Editar serviço' %></td>
+                <td> <%= link_to '', servico, method: :delete, class:"btn btn-outline-danger fas fa-trash-alt fa-sm", 
+                title: 'Deletar serviço', data: { confirm: 'Tem certeza que deseja deletar o serviço?' } %> </td> 
+            </tr>
+        <% end %>
+    </tbody>
 </table>
 
 <br>
 
-<%= link_to 'New Servico', new_servico_path %>
+<%= link_to 'Novo', new_servico_path, class: 'btn btn-success float-right',
+title: 'Registrar novo serviço' %>

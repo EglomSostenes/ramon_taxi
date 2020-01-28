@@ -16,7 +16,23 @@
           <a class="nav-link" href=<%= descricao_servicos_path %>> Passeios </a>
         </li>
 
+        <% if user_signed_in? and current_user.admin %>
+          <li class="nav-item active">
+            <a class="nav-link" href=<%= servicos_path %>> Serviços </a>
+          </li>
+        <% end %>
+
     </ul>
+
+    <div id="nav-logado" class="navbar-text">
+      <% if user_signed_in? %>
+        Logado: <strong><%= current_user.email %></strong>
+        <%= link_to "", destroy_user_session_path, method: :delete, 
+            class: 'fas fa-sign-out-alt fa-lg pl-3', title: 'Deslogar' %>
+      <% else %>
+        <%= link_to "Login", new_user_session_path%>
+      <% end %>
+    </div>
 
   </div>
 </nav>

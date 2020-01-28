@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  devise_for :users
   resources :servicos do
     collection do
       get :pagina_inicial
