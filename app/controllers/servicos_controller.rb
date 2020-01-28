@@ -1,5 +1,6 @@
 class ServicosController < ApplicationController
   before_action :authenticate_user!, only: [:index, :show, :edit, :update, :destroy, :ativos]
+  before_action :verifica_admin, only: [:index, :show, :edit, :update, :destroy, :ativos]
   before_action :set_servico, only: [:show, :edit, :update, :destroy]
 
   # GET /servicos
@@ -80,5 +81,11 @@ class ServicosController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def servico_params
         params.require(:servico).permit(:nome, :email, :fone, :inicio, :fim)
+    end
+
+    def verifica_admin
+      if current_user.admin == false
+        redirect_to pagina_inicial_servicos_path
+      end
     end
 end
